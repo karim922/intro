@@ -1,0 +1,153 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            margin: 0;
+             
+            transition: 0.5s ease-in;
+            backdrop-filter: blur(10px);
+             
+
+        }
+        .bigImage-container{
+            height: 75vh;
+            display: flex;
+            justify-content:center;
+            align-items: center;
+        }
+        .smallImage-container{
+            height: 25vh;
+            display: flex;
+            justify-content:center;
+           align-items: center;
+
+        }
+
+         
+        img{
+            width: 200px;
+        }
+         
+        .smallImage-container :hover{
+            transform: scale(1.2);
+            box-shadow:  5px 5px 5px white ;
+                           
+            
+
+        }
+        .smallImage-container :active{
+            transform: scale(1.1);
+             
+        }
+        .round-left{
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+        }
+        .round-right{
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        .bigImageDiv{
+            background-image: url(./images/img1.jpg);
+            transition: all 0.5s linear;
+            width: 55%;
+            height:  90%;
+            border-radius: 20px;
+            margin: 100px;
+            background-position: center;
+            background-size: cover;
+           
+             
+        }
+        button{
+            padding: 10px 20px;
+            font-size: 20px; 
+            border: none;
+            color: white;
+            background-color: darkcyan;
+            box-shadow: 3px 5px 5px white;
+             
+        }
+
+ 
+
+    </style>
+ </head>
+ <body>
+    <div class="bigImage-container">
+        <button>previous</button>
+        <div class="bigImageDiv"></div>
+        <button>next</button>
+
+         
+         
+
+        </div>
+        <div class="smallImage-container">
+
+        </div>
+
+    </div>
+
+     
+    <script>
+        let next = document.querySelectorAll('button ')[1]
+         let prev = document.querySelectorAll('button')[0] 
+         let image = document.querySelector('.bigImageDiv')
+
+         let pictures = ["img1","img2","img3","img4","img5","img6"] 
+         for (let i = 0; i < pictures.length; i++) {
+             let img = document.createElement('img')
+             img.src = "./images/"+ pictures[i]+".jpg"
+             if (i == 0) {
+                 img.className = 'round-left'
+             }
+             if (i == pictures.length-1) {
+                 img.className = 'round-right'
+             }
+             document.querySelector('.smallImage-container').append(img) 
+          img.onclick = ()=>{
+            image.style.backgroundImage = 'url("./images/' + pictures[i] + '.jpg")';
+          }
+          img.onmouseenter = ()=>{
+            document.querySelector('body').style.backgroundImage =  'url("./images/' + pictures[i] + '.jpg")';
+             
+          } 
+
+
+                 
+              
+             
+         }
+
+        let counter = 0
+         next.onclick = ()=>{
+               counter =  (counter + 1) % pictures.length
+                image.style.backgroundImage = ' url(./images/'+pictures[counter] +'.jpg)' 
+                document.querySelector('body').style.backgroundImage = ' url(./images/'+pictures[counter] +'.jpg)' 
+                
+             
+         }
+         
+         prev.onclick = ()=>{
+            counter = (counter - 1 + pictures.length) % pictures.length;
+        image.style.backgroundImage = 'url(./images/' + pictures[counter] + '.jpg)';
+
+
+             
+
+         }
+
+         
+    </script>
+    
+ </body>
+ </html>
